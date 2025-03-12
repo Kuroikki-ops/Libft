@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: diespino <diespino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 17:50:24 by diespino          #+#    #+#             */
-/*   Updated: 2025/01/15 18:06:05 by diespino         ###   ########.fr       */
+/*   Created: 2025/01/21 14:28:48 by diespino          #+#    #+#             */
+/*   Updated: 2025/01/21 16:04:05 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isprint(int c)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	if ((c >= 32 && c <= 126))
-		return (1);
-	return (0);
+	unsigned char	*ptr;
+	unsigned char	to_find;
+
+	ptr = (unsigned char *)s;
+	to_find = (unsigned char)c;
+	while (n--)
+	{
+		if (*ptr == to_find)
+			return ((void *)ptr);
+		ptr++;
+	}
+	return (NULL);
 }

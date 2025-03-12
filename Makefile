@@ -6,7 +6,7 @@
 #    By: diespino <diespino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/15 17:16:03 by diespino          #+#    #+#              #
-#    Updated: 2025/01/20 18:55:11 by diespino         ###   ########.fr        #
+#    Updated: 2025/02/03 15:37:51 by diespino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,28 @@ SRC = ft_isalpha.c\
       ft_toupper.c\
       ft_tolower.c\
       ft_strchr.c\
-      ft_strrchr.c
+      ft_strrchr.c\
+      ft_strncmp.c\
+      ft_memchr.c\
+      ft_memcmp.c\
+      ft_strnstr.c\
+      ft_atoi.c\
+      ft_calloc.c\
+      ft_strdup.c\
+      ft_substr.c\
+      ft_strjoin.c\
+      ft_strtrim.c\
+      ft_split.c\
+      ft_itoa.c\
+      ft_strmapi.c\
+      ft_striteri.c\
+      ft_putchar_fd.c\
+      ft_putstr_fd.c\
+      ft_putendl_fd.c\
+      ft_putnbr_fd.c
 
 OBJS = $(SRC:.c=.o)
+DEPS = $(SRC:.c=.d)
 
 HEAD = libft.h
 
@@ -39,16 +58,19 @@ CC = gcc
 CLIB = ar rcs
 CFLAGS = -Wall -Wextra -Werror -I.
 
-$(NAME): $(OBJS) Makefile libft.h
-	$(CLIB) -o $(NAME) $(OBJS)
+$(NAME): $(OBJS) libft.h
+	$(CLIB) $(NAME) $(OBJS)
 
-%.o: %.c $(HEAD)
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.c $(HEAD) Makefile
+	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
+
+-include $(DEPS)
 
 all: $(NAME)
 
 clean:
 	$(RM) $(OBJS)
+	$(RM) $(DEPS)
 	
 fclean: clean
 	$(RM) $(NAME)

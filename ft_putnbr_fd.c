@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: diespino <diespino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 16:14:45 by diespino          #+#    #+#             */
-/*   Updated: 2025/01/20 14:45:12 by diespino         ###   ########.fr       */
+/*   Created: 2025/02/03 15:24:57 by diespino          #+#    #+#             */
+/*   Updated: 2025/02/03 17:08:24 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, const char *src, size_t size)
+void	ft_putnbr_fd(int n, int fd)
 {
-	size_t	dest_len;
-	size_t	src_len;
-	size_t	i;
+	int	digit;
 
-	dest_len = ft_strlen(dest);
-	src_len = ft_strlen(src);
-	i = 0;
-	if (size == 0 || dest_len >= size)
-		return (src_len + size);
-
-	while (src[i] && dest_len + i < size - 1)
+	digit = n + 48;
+	if (n == -2147483648)
+		write(fd, "-2147483648", 11);
+	else if (n < 0)
 	{
-		dest[dest_len + i] = src[i];
-		i++;
+		write(fd, "-", 1);
+		n = -n;
+		ft_putnbr_fd(n, fd);
 	}
-	dest[dest_len + i] = '\0';
-	return (dest_len + src_len);
-
+	else
+	{
+		if (n > 9)
+		{
+			ft_putnbr_fd(n / 10, fd);
+			ft_putnbr_fd(n % 10, fd);
+		}
+		else
+			write(fd, &digit, 1);
+	}
 }
