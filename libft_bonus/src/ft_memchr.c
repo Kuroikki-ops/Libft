@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: diespino <diespino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 18:30:23 by diespino          #+#    #+#             */
-/*   Updated: 2025/01/16 17:27:52 by diespino         ###   ########.fr       */
+/*   Created: 2025/01/21 14:28:48 by diespino          #+#    #+#             */
+/*   Updated: 2025/01/21 16:04:05 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t	i;
+	unsigned char	*ptr;
+	unsigned char	to_find;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	ptr = (unsigned char *)s;
+	to_find = (unsigned char)c;
+	while (n--)
+	{
+		if (*ptr == to_find)
+			return ((void *)ptr);
+		ptr++;
+	}
+	return (NULL);
 }

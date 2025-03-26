@@ -6,7 +6,7 @@
 /*   By: diespino <diespino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:59:57 by diespino          #+#    #+#             */
-/*   Updated: 2025/02/07 16:10:06 by diespino         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:46:53 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	if (!s)
-		return (0);
-	if (c == '\0')
-		return ((char *)s);
 	while (*s)
 	{
 		if (*s == (char)c)
 			return ((char *)s);
 		s++;
 	}
+	if (c == '\0')
+		return ((char *)s);
 	return (0);
 }
